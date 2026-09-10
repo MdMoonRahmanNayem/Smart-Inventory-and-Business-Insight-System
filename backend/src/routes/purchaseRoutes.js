@@ -1,0 +1,27 @@
+const express = require('express');
+const router = express.Router();
+const {
+  createPurchaseOrder,
+  getPurchaseOrders,
+  getPurchaseOrderById,
+  updatePurchaseOrderStatus,
+} = require('../controllers/purchaseController');
+const { protect, restrictTo } = require('../middleware/authMiddleware');
+
+// Protect all routes
+router.use(protect);
+
+// System Admin/Owner/Manager/Inventory Staff routes
+router.use(restrictTo('System Admin', 'Owner', 'Manager', 'Inventory Staff'));
+
+router.route('/')
+  .post(createPurchaseOrder)
+  .get(getPurchaseOrders);
+
+router.route('/:id')
+  .get(getPurchaseOrderById);
+
+router.route('/:id/status')
+  .put(updatePurchaseOrderStatus);
+
+module.exports = router;
