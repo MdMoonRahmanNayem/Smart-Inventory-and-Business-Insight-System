@@ -589,7 +589,7 @@ Make sure the following are installed:
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/SarafatAlamIrfan/SIBIS.git
+git clone https://github.com/MdMoonRahmanNayem/Smart-Inventory-and-Business-Insight-System.git
 cd SIBIS
 ```
 
