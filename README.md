@@ -1,705 +1,417 @@
-# SIBIS - Smart Inventory & Business Insight System
+# SIBIS — Smart Inventory & Business Insight System
 
-> A full-stack retail management platform for managing inventory, sales, purchases, suppliers, reporting, and AI-assisted business insights in one centralized system.
+**An AI-enabled, full-stack retail management platform for inventory control, point-of-sale operations, procurement management, and data-driven business insights.**
 
----
+<p align="center">
 
-## Live Demo: https://sibis-bd.netlify.app/ 
+  **Live Demo:** https://sibis-bd.netlify.app/
+
+  **Backend API:** https://sibis-backend.onrender.com
+
+  **Project Demonstration:** https://youtu.be/jX3azHFIuqA
+
+</p>
 
 ---
 
 ## Overview
 
-**SIBIS (Smart Inventory & Business Insight System)** is a web-based retail management platform developed to simplify day-to-day operations for small and medium-sized retail businesses.
+SIBIS (Smart Inventory & Business Insight System) is a full-stack business management platform designed to simplify retail operations by bringing inventory management, sales processing, purchasing, supplier management, reporting, and business analytics into one centralized system.
 
-The system brings essential retail activities into a single platform, including product and inventory management, point-of-sale operations, purchase management, supplier management, dashboards, reports, user management, and AI-assisted business insights.
+The platform supports multiple stores, role-based access control, automated stock updates, purchase order workflows, and AI-powered business insights. Its forecasting and recommendation features help store owners make informed decisions about inventory replenishment and product demand.
 
-SIBIS is designed for businesses such as grocery stores, mini marts, pharmacies, and other local retail shops where maintaining accurate inventory records and monitoring business performance are important for daily operations.
+SIBIS combines a React-based frontend, a Node.js and Express backend, MongoDB for data storage, and a Python-based AI/ML service integrated with Google's Gemini API.
 
-The system connects sales and purchasing activities with inventory updates, allowing stock information to remain synchronized with business transactions. It also integrates the **Google Gemini API** to generate business summaries and insights from relevant business data.
+## Live Deployment
 
----
+| Component | Platform | Link |
+|---|---|---|
+| Frontend | Netlify | [Open SIBIS](https://sibis-bd.netlify.app/) |
+| Backend | Render | [Backend Server](https://sibis-backend.onrender.com) |
+| Database | MongoDB Atlas | [MongoDB Cloud](https://cloud.mongodb.com/) |
+| Project Demo | YouTube | [Watch Demonstration](https://youtu.be/jX3azHFIuqA) |
 
-## Problem
-
-Small retail businesses often manage inventory, sales, purchases, and supplier information using manual records, spreadsheets, or separate systems.
-
-This can lead to:
-
-- Inaccurate stock records
-- Difficulty tracking sales and purchases
-- Manual inventory updates
-- Limited visibility into business performance
-- Difficulty identifying low-stock products
-- Scattered supplier and product information
-- Time-consuming business reporting
-
-SIBIS addresses these problems by bringing the major retail operations into one connected system.
-
----
-
-## What SIBIS Provides
-
-SIBIS provides a centralized workflow for managing the major activities of a retail business.
-
-### Inventory
-Manage products, categories, stock quantities, stock thresholds, and inventory activities from one place.
-
-### Sales & POS
-Process customer purchases through a dedicated POS interface while automatically updating the related inventory.
-
-### Purchase Management
-Create and manage purchase orders, track their status, and update inventory when purchased products are received.
-
-### Supplier Management
-Maintain supplier information and associate suppliers with purchasing and product-related activities.
-
-### Dashboard & Reports
-View important business information through dashboards and organized reports.
-
-### User Management
-Manage users according to their assigned roles and permissions.
-
-### AI Business Insights
-Use the Google Gemini API to generate business summaries and insights based on available business information.
-
----
+> **Note:** MongoDB Atlas is the database management platform. Access to the actual database requires authorized credentials.
 
 ## Key Features
 
-### Authentication & Role-Based Access
+### 1. Authentication & User Management
 
-SIBIS supports multiple user roles with different levels of access:
+- JWT-based authentication with token expiration.
+- Password hashing using bcrypt.
+- Email verification using a six-digit OTP during store registration.
+- OTP expiration after 10 minutes.
+- Firebase Authentication support and Firebase UID synchronization.
+- User profiles with avatar, phone number, bio, and account status.
+- Automatic assignment of the Owner role to the first user.
 
-- System Administrator
-- Store Owner
-- Store Manager
-- Cashier
-- Inventory Staff
+### 2. Role-Based Access Control (RBAC)
 
-Authentication is handled using **Firebase Authentication**, while backend authorization controls access to protected operations.
+SIBIS supports five user roles with different permissions.
 
----
+| Role | Responsibilities |
+|---|---|
+| System Admin | Platform-wide store management, platform statistics, and administrative monitoring |
+| Owner | Store operations, staff management, purchasing approvals, and business oversight |
+| Manager | Operational management, purchase order approvals, and business monitoring |
+| Cashier | Point-of-sale operations and sales processing |
+| Inventory Staff | Product and inventory operations, stock updates, and purchase order preparation |
 
-### Product Management
+Role-based permissions help restrict access to features according to each user's responsibilities.
 
-The product management module provides centralized management of product information.
+### 3. Multi-Store Management
 
-Users with appropriate permissions can:
+- Register and manage multiple stores.
+- Store information includes name, address, city, country, and business type.
+- Automatically generated store codes.
+- Store status management: Active, Suspended, and Trial.
+- Subscription plan support: Starter, Pro, and Enterprise.
+- Store-specific data isolation.
+- Owner-to-store association.
 
-- Add products
-- Edit products
-- Delete products
-- Search products
-- Manage product categories
-- Maintain purchase and selling prices
-- Set stock-related thresholds
-- Maintain supplier information
-- Manage expiry-related product information
+### 4. Dashboard & Business Analytics
 
----
+- Centralized business dashboard.
+- Sales, revenue, and product overview.
+- Performance charts and graphical summaries.
+- Platform-wide statistics for System Admin.
+- Store-level business monitoring.
 
-### Inventory Management
+### 5. Point of Sale (POS)
 
-The inventory module keeps track of the current stock status of products.
+- Multi-item shopping cart.
+- Stock validation before completing a sale.
+- Automatically generated invoice numbers.
+- Multiple payment methods: Cash, Card, Mobile Pay, and Split Payment.
+- Paid and Pending payment statuses.
+- Automatic inventory deduction after a sale.
+- Integration between sales records and inventory history.
 
-Key operations include:
+### 6. Product & Inventory Management
 
-- Monitoring available stock
-- Updating stock quantities
-- Managing stock adjustments
-- Identifying low-stock products
-- Tracking inventory activities
-- Handling stock updates from sales
-- Handling stock updates from received purchases
-- Monitoring applicable expiry information
+- Create, view, update, and delete products.
+- SKU and barcode support.
+- Product category and brand management.
+- Purchase price and selling price tracking.
+- Minimum stock threshold configuration.
+- Product expiration tracking.
+- Alerts for products expiring within 30 days.
+- Fixed-amount and percentage-based discounts.
+- Discount expiration and effective-price calculation.
 
-Inventory changes are connected with sales and purchase operations to reduce manual stock updates.
+### 7. Inventory History & Audit Logs
 
----
+Track important inventory changes, including:
 
-### Point of Sale (POS)
+- Sales.
+- Purchases.
+- Stock In.
+- Stock Out.
+- Manual Stock Adjustments.
 
-The POS module is designed for fast and organized sales processing.
+These records help users monitor inventory movements and review historical changes.
 
-Cashiers can:
+### 8. Smart Reordering & Demand Forecasting
 
-- Search for products
-- Add products to a transaction
-- Adjust quantities
-- Calculate transaction totals
-- Record customer purchases
-- Process payment information
-- Generate invoices
-- Complete sales transactions
+- Automatic low-stock detection.
+- Centralized reorder list.
+- Supplier-linked reorder suggestions.
+- AI-assisted reorder quantity calculation.
+- Seven-day demand forecasting using Linear Regression.
+- Moving-average fallback when historical data is limited.
+- Forecast-based support for inventory replenishment decisions.
 
-After a sale is completed, the corresponding product stock is updated automatically.
+### 9. Supplier Management
 
----
+- Create, view, update, and delete supplier records.
+- Store supplier names, contact persons, and phone numbers.
+- Link suppliers with products.
+- Associate suppliers with purchase orders.
 
-### Purchase Management
+### 10. Purchase Order Management
 
-The purchase module manages the procurement workflow.
+SIBIS provides a structured purchase order workflow.
 
-It supports:
+**Purchase Order Status Flow:**
 
-- Creating purchase orders
-- Managing purchase order details
-- Tracking purchase order status
-- Receiving purchased products
-- Updating inventory after receiving products
-- Connecting purchases with suppliers
+`Draft → Ordered → Received`
 
-This provides a structured process for managing product procurement.
+A purchase order may also be marked as `Cancelled`.
 
----
+Features include:
 
-### Supplier Management
+- Automatically generated purchase order numbers.
+- Draft preparation by Inventory Staff.
+- Order approval and status management according to role permissions.
+- Stock updates when an order is received.
+- Automatic inventory log creation after receiving stock.
+- Supplier references for procurement tracking.
 
-The supplier module provides a centralized location for supplier records.
+### 11. Staff Management
 
-It supports:
+- Add and remove store staff.
+- Assign user roles.
+- Activate or deactivate staff accounts.
+- Monitor staff activity.
+- Support controlled access to store operations.
 
-- Adding suppliers
-- Updating supplier information
-- Managing supplier records
-- Connecting suppliers with products
-- Maintaining supplier-related purchase information
+### 12. Store Calendar
 
----
+- Create custom calendar events.
+- Track product expiration dates.
+- Manage holiday-related events.
+- Display weather-related events.
+- Track reorder-related events.
+- Support Google Calendar event IDs.
 
-### Dashboard
+### 13. Notifications
 
-The dashboard provides an overview of important business information.
+The notification system supports alerts for:
 
-Depending on the user's access level, the dashboard can provide information related to:
+- Low-stock products.
+- Expiring products.
+- Purchase order status changes.
+- Platform-wide system notifications.
 
-- Sales
-- Revenue
-- Gross margin
-- Products
-- Inventory
-- Low-stock products
-- Business activities
+### 14. Reports & Business Performance
 
-This allows owners and managers to quickly review the current state of the business.
+- Sales performance reports.
+- Revenue and profit analysis.
+- Inventory reports.
+- Business performance monitoring.
+- Support for data-driven operational decisions.
 
----
+### 15. Store Activity Monitoring
 
-### Reports
+The activity audit system records important operational events, including:
 
-SIBIS provides reporting functionality for reviewing business activities.
+- POS sales, invoice details, amounts, and items.
+- Inventory stock-in and stock-out activities.
+- Discount applications.
+- Purchase order creation, receipt, and cancellation.
+- Staff additions and removals.
+- Relevant system events.
 
-Reports cover areas including:
+### 16. Platform Administration
 
-- Inventory
-- Sales
-- Purchases
-- Business performance
+The System Admin can access platform-level management features, including:
 
-The reporting functionality helps users review operational data and make informed decisions.
+- View registered stores.
+- Monitor store product counts, sales, and revenue.
+- Create stores and associate owners.
+- Manage store statuses.
+- Review platform logs and staff logs.
+- View platform statistics for stores, products, users, and revenue.
 
----
+## AI & Machine Learning Features
 
-### Notifications
+SIBIS integrates a Python-based AI/ML service with Google's Gemini API to support forecasting, business analysis, and conversational assistance.
 
-The system provides inventory-related notifications and alerts to draw attention to conditions that require action.
+### 1. Demand Forecasting
 
-Examples include:
+- Uses Linear Regression to estimate product demand for the next seven days.
+- Uses moving-average calculations when available historical data is insufficient.
+- Supports suggested reorder quantities.
+- Uses Gemini API integration with a local Python calculation fallback.
 
-- Low-stock notifications
-- Expiry-related notifications
-- Inventory warnings
+### 2. Business Insights Engine
 
----
+The insights engine analyzes available business and inventory information to identify:
 
-## AI Integration
+- Potential stock-out risks.
+- Products running low, including a three-day warning.
+- Slow-moving products with no sales in 30 days.
+- Products with the highest profit margins.
+- Top-selling products over the last seven days.
+- AI-generated executive summaries using Gemini.
 
-SIBIS integrates the **Google Gemini API** to provide AI-assisted business insights.
+### 3. SIBIS AI Advisor
 
-The AI functionality works with relevant business information available in the system and generates understandable summaries that help users review their business data.
+The AI Advisor provides a conversational interface for business-related questions and recommendations.
 
-### AI Flow
+Features include:
 
-```text
-React Frontend
-      │
-      ▼
-Node.js + Express Backend
-      │
-      ▼
-Business Data
-      │
-      ▼
-Google Gemini API
-      │
-      ▼
-Business Summary / Insight
-      │
-      ▼
-React Frontend
-````
+- Google Gemini 1.5 Flash integration.
+- Recent conversation context using the last eight messages.
+- Google Search Grounding support.
+- Store-specific context, including stock levels, sales, and weather.
+- Bangladesh-specific contextual information, including festivals, weather, supply-chain alerts, and expiration concerns.
+- Rule-based local fallback responses.
+- Markdown-formatted responses.
+- Quick suggestion chips.
+- Typing animation and a Stop button.
 
-The Gemini API is accessed through the backend rather than directly from the frontend.
-
-This keeps the AI integration within the server-side application and allows the backend to control the data sent to the external AI service.
-
----
-
-## System Architecture
-
-SIBIS follows a client-server architecture with separate frontend, backend, database, authentication, and AI components.
-
-```text
-                    ┌──────────────────────┐
-                    │       Users          │
-                    │ Owner / Manager      │
-                    │ Cashier / Staff      │
-                    │ Administrator        │
-                    └──────────┬───────────┘
-                               │
-                               ▼
-                    ┌──────────────────────┐
-                    │    React Frontend    │
-                    │     Tailwind CSS     │
-                    └──────────┬───────────┘
-                               │
-                             REST API
-                               │
-                               ▼
-                    ┌──────────────────────┐
-                    │   Node.js + Express  │
-                    │       Backend        │
-                    └───────┬───────┬──────┘
-                            │       │
-                            │       ▼
-                            │  ┌───────────────┐
-                            │  │ Google Gemini │
-                            │  │      API      │
-                            │  └───────────────┘
-                            │
-                            ▼
-                    ┌──────────────────────┐
-                    │       MongoDB        │
-                    │       Database       │
-                    └──────────────────────┘
-```
-
----
+These features are designed to help users understand business conditions and make better-informed operational decisions.
 
 ## Technology Stack
 
-| Layer             | Technologies                   |
-| ----------------- | ------------------------------ |
-| Frontend          | React.js, Vite, Tailwind CSS   |
-| Routing           | React Router                   |
-| API Communication | Axios / REST API               |
-| Backend           | Node.js, Express.js            |
-| Database          | MongoDB, Mongoose              |
-| Authentication    | Firebase Authentication        |
-| Authorization     | JWT, Firebase Admin SDK        |
-| AI Integration    | Google Gemini API              |
-| Security          | Helmet                         |
-| Logging           | Morgan                         |
-| Development       | Git, GitHub, VS Code, Postman  |
-| Deployment        | Netlify, Render, MongoDB Atlas |
+| Category | Technologies |
+|---|---|
+| Frontend | React.js, Vite, Tailwind CSS, Lucide Icons |
+| Backend | Node.js, Express.js |
+| Database | MongoDB, Mongoose ODM |
+| Authentication | JWT, bcrypt, Firebase Authentication support |
+| AI/ML Service | Python, FastAPI |
+| Machine Learning | scikit-learn, pandas, NumPy |
+| Generative AI | Google Gemini 1.5 Flash API |
+| PDF Generation | fpdf2 |
+| Frontend Deployment | Netlify |
+| Backend Deployment | Render |
+| Database Hosting | MongoDB Atlas |
 
----
+## System Architecture
 
-## Project Structure
-
-```text
-SIBIS/
-│
-├── backend/
-│   ├── src/
-│   │   ├── config/
-│   │   │   ├── db.js
-│   │   │   ├── firebase.js
-│   │   │   ├── seed.js
-│   │   │   └── seed_200_products.js
-│   │   │
-│   │   ├── controllers/
-│   │   ├── middleware/
-│   │   ├── models/
-│   │   ├── routes/
-│   │   ├── utils/
-│   │   └── app.js
-│   │
-│   ├── migrate.js
-│   ├── package.json
-│   ├── scratch_api_test.js
-│   └── scratch_test.js
-│
-├── frontend/
-│   ├── src/
-│   │   ├── assets/
-│   │   ├── components/
-│   │   ├── config/
-│   │   ├── context/
-│   │   ├── pages/
-│   │   ├── services/
-│   │   ├── App.css
-│   │   ├── index.css
-│   │   └── main.jsx
-│   │
-│   ├── package.json
-│   └── vite.config.js
-│
-├── check_workspace.js
-├── package.json
-└── README.md
-```
-
----
-
-## Backend Structure
-
-The backend follows a modular structure to keep API handling and business logic organized.
+The system uses a frontend, backend API, database, and AI/ML service to support its main operations.
 
 ```text
-backend/
-└── src/
-    ├── config/
-    ├── controllers/
-    ├── middleware/
-    ├── models/
-    ├── routes/
-    ├── utils/
-    └── app.js
+                 ┌────────────────────────┐
+                 │       User / Staff     │
+                 └────────────┬───────────┘
+                              │
+                              ▼
+                 ┌────────────────────────┐
+                 │   React + Vite Client  │
+                 │        Netlify         │
+                 └────────────┬───────────┘
+                              │
+                              ▼
+                 ┌────────────────────────┐
+                 │   Node.js + Express    │
+                 │      Render API        │
+                 └───────┬────────┬───────┘
+                         │        │
+                ┌────────▼───┐  ┌─▼────────────────┐
+                │  MongoDB   │  │ Python FastAPI   │
+                │   Atlas    │  │ AI/ML Service    │
+                └────────────┘  └────────┬─────────┘
+                                         │
+                                    ┌────▼─────────┐
+                                    │ Gemini API   │
+                                    └──────────────┘
 ```
 
-### Main Backend Layers
+The diagram represents the intended high-level architecture. Actual service communication depends on the deployed application configuration.
 
-**Config**
-Contains database, Firebase, and related application configuration.
+## Database Collections
 
-**Controllers**
-Handles the business logic associated with API operations.
+The project uses MongoDB collections for the following data entities:
 
-**Middleware**
-Handles authentication, authorization, and request-level processing.
+- `users` — User accounts and roles.
+- `stores` — Store information and settings.
+- `products` — Product and inventory details.
+- `sales` — Sales transactions.
+- `suppliers` — Supplier records.
+- `purchaseorders` — Purchase order information.
+- `inventorylogs` — Inventory movement history.
+- `activitylogs` — Store activity records.
+- `platformlogs` — Platform-level administrative logs.
+- `calendarevents` — Store calendar events.
 
-**Models**
-Defines MongoDB data models using Mongoose.
+## Demo Accounts
 
-**Routes**
-Defines the REST API endpoints used by the frontend.
+You can explore SIBIS using the following role-based demonstration accounts.
 
-**Utils**
-Contains reusable backend utilities.
+| Role | Email | Password |
+|---|---|---|
+| System Admin (Platform Super Admin) | `admin@sibis.com` | `admin123` |
+| Store Owner | `owner@sibis.com` | `password123` |
+| Store Manager | `manager@sibis.com` | `password123` |
+| Cashier | `cashier@sibis.com` | `password123` |
+| Inventory Staff | `inventory@sibis.com` | `password123` |
 
----
+**To get started:**
 
-## Frontend Structure
+1. Open the [SIBIS Live Application](https://sibis-bd.netlify.app/).
+2. Sign in using the credentials for the role you want to explore.
+3. Explore the features available to that role.
 
-The frontend uses a component-based React architecture.
+> **Security notice:** These credentials are published for demonstration purposes. They should only be used for non-sensitive demo accounts. Do not publish production credentials, API keys, private tokens, or database connection strings in a public repository.
 
-```text
-frontend/
-└── src/
-    ├── assets/
-    ├── components/
-    ├── config/
-    ├── context/
-    ├── pages/
-    ├── services/
-    ├── App.css
-    ├── index.css
-    └── main.jsx
-```
+## Getting Started
 
-### Main Frontend Layers
-
-**Components**
-Reusable UI components used throughout the application.
-
-**Pages**
-Individual application screens for different modules and user roles.
-
-**Context**
-Application-wide state and authentication-related context.
-
-**Services**
-Handles communication between the frontend and backend APIs.
-
-**Config**
-Contains frontend configuration.
-
----
-
-## User Roles
-
-### System Administrator
-
-Responsible for platform-level administration and user-related management.
-
-### Store Owner
-
-Has access to overall business information, dashboards, reports, and store management functionality.
-
-### Store Manager
-
-Handles day-to-day store operations, including inventory, purchasing, and other operational activities.
-
-### Cashier
-
-Handles customer sales and POS transactions.
-
-### Inventory Staff
-
-Handles product and inventory-related operations and monitors stock conditions.
-
----
-
-## API Overview
-
-The backend provides REST APIs for the major modules of SIBIS.
-
-```text
-/api/users
-/api/products
-/api/sales
-/api/purchase-orders
-/api/suppliers
-/api/ai
-/api/admin
-```
-
-The frontend communicates with these APIs to perform application operations and retrieve business information.
-
----
-
-## Database
-
-SIBIS uses **MongoDB** as its primary database with **Mongoose** as the ODM layer.
-
-The database manages information related to:
-
-* Users
-* Products
-* Categories
-* Suppliers
-* Inventory
-* Sales
-* Purchase Orders
-* Business activities
-* Transaction records
-
-For production deployment, the application uses **MongoDB Atlas**.
-
----
-
-## Authentication & Security
-
-SIBIS uses multiple mechanisms for authentication and access control.
-
-### Firebase Authentication
-
-Used for user authentication and identity management.
-
-### JWT
-
-Used for authenticated backend requests and authorization-related processing.
-
-### Firebase Admin SDK
-
-Used on the backend for server-side Firebase authentication handling.
-
-### Role-Based Authorization
-
-Protected backend operations verify user roles before allowing access to restricted functionality.
-
-### Helmet
-
-The Express backend uses Helmet to add security-related HTTP headers.
-
----
-
-## Testing
-
-Testing was performed across the major application components to verify that the system works correctly as an integrated platform.
-
-Testing activities include:
-
-* API testing
-* Authentication testing
-* Role-based access testing
-* Database operation testing
-* Inventory transaction testing
-* POS testing
-* Purchase workflow testing
-* Frontend-backend integration testing
-* Deployment testing
-
-**Postman** was used for testing and verifying backend APIs.
-
----
-
-## Development Process
-
-SIBIS was developed following the Software Development Life Cycle (SDLC).
-
-The project development process covered:
-
-```text
-Requirement Analysis
-        ↓
-Software Requirements Specification
-        ↓
-System & Architecture Design
-        ↓
-Database & UML Design
-        ↓
-Implementation
-        ↓
-Testing & Debugging
-        ↓
-Deployment
-        ↓
-Documentation
-```
-
-The project includes software engineering artifacts such as:
-
-* Use Case Diagram
-* Activity Diagrams
-* Architectural Diagrams
-* Component Diagrams
-* Class Diagram
-* ER Diagram
-* Navigation Flow Diagram
-* UI Designs
-
----
-
-## Local Setup
+To run SIBIS locally, you need the source code and the configuration required by each service.
 
 ### Prerequisites
 
-Make sure the following are installed:
+- Node.js and npm.
+- MongoDB instance or MongoDB Atlas account.
+- Python environment for the AI/ML service.
+- Google Gemini API key for Gemini-powered features.
+- Firebase configuration if Firebase authentication features are enabled.
 
-* Node.js
-* npm
-* Git
-* MongoDB / MongoDB Atlas
-* Firebase project
-* Google Gemini API access
+### Installation
 
-### Clone the Repository
+Clone the repository:
 
 ```bash
-git clone https://github.com/MdMoonRahmanNayem/Smart-Inventory-and-Business-Insight-System.git
-cd SIBIS
+git clone https://github.com/MdMoonRahmanNayem/Smart-Inventory-Business-Insight-System-SIBIS-.git
+cd Smart-Inventory-Business-Insight-System-SIBIS-
 ```
 
-### Backend
+Install the frontend and backend dependencies from their respective project directories.
 
 ```bash
-cd backend
 npm install
 ```
 
-Create the required `.env` configuration and add your database, authentication, and Gemini API credentials.
-
-Start the backend:
+For the Python AI/ML service, install the dependencies listed in its `requirements.txt` file, if provided.
 
 ```bash
-npm start
+pip install -r requirements.txt
 ```
 
-### Frontend
+**Important:** The exact directory names, environment variables, and startup commands depend on the repository's current structure. Run these commands from the appropriate directories and follow the configuration files in the source code.
 
-Open another terminal:
+### Environment Configuration
 
-```bash
-cd frontend
-npm install
-```
+Configure the required environment variables using the names expected by the application.
 
-Configure the required frontend environment variables.
+Typical configuration may include:
 
-Start the development server:
+- MongoDB connection URI.
+- JWT secret.
+- Gemini API key.
+- Firebase credentials or configuration.
+- Frontend API base URL.
+- Backend port and service URLs.
 
-```bash
-npm run dev
-```
+Do not commit `.env` files, secrets, or production credentials to GitHub. Use the deployment platform's environment-variable settings for deployed services.
 
-The local application can then be accessed through the URL provided by Vite.
+## Security Considerations
+
+- Passwords are hashed using bcrypt.
+- JWT is used for authentication.
+- Role-based access control separates user permissions.
+- Store-specific data isolation supports multi-store operations.
+- Email OTP verification supports store registration.
+- Sensitive configuration values should be stored in environment variables.
+
+Security features should always be reviewed and tested against the actual deployed implementation before production use.
+
+## Future Improvements
+
+Potential areas for future development include:
+
+- More advanced demand forecasting models.
+- Expanded sales and inventory analytics.
+- Additional integrations with accounting and e-commerce systems.
+- More comprehensive automated testing.
+- Enhanced monitoring and performance optimization.
+- Improved backup, recovery, and operational security workflows.
+
+## Project Links
+
+- **Live Application:** https://sibis-bd.netlify.app/
+- **GitHub Repository:** https://github.com/MdMoonRahmanNayem/Smart-Inventory-Business-Insight-System-SIBIS-
+- **Backend API:** https://sibis-backend.onrender.com
+- **MongoDB Atlas:** https://cloud.mongodb.com/
+- **Demonstration Video:** https://youtu.be/jX3azHFIuqA
 
 ---
 
-## Environment Configuration
+## Author
 
-Sensitive credentials should be stored in environment variables rather than committed to the repository.
+**SIBIS — Smart Inventory & Business Insight System**
 
-### Backend
+A full-stack software engineering project combining retail management, inventory automation, business analytics, and AI-assisted decision support.
 
-```env
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_jwt_secret
-JWT_EXPIRES_IN=30d
-GEMINI_API_KEY=your_gemini_api_key
-```
-
-### Frontend
-
-```env
-VITE_FIREBASE_API_KEY=your_api_key
-VITE_FIREBASE_AUTH_DOMAIN=your_auth_domain
-VITE_FIREBASE_PROJECT_ID=your_project_id
-VITE_FIREBASE_STORAGE_BUCKET=your_storage_bucket
-VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
-VITE_FIREBASE_APP_ID=your_app_id
-VITE_FIREBASE_MEASUREMENT_ID=your_measurement_id
-VITE_API_URL=your_backend_api_url
-```
-
-The exact values depend on the Firebase project, database, backend deployment, and API configuration being used.
-
----
-
-## Deployment
-
-SIBIS uses a separate deployment setup for its frontend, backend, and database.
-
-| Component | Deployment    |
-| --------- | ------------- |
-| Frontend  | Netlify       |
-| Backend   | Render        |
-| Database  | MongoDB Atlas |
-
-The frontend communicates with the deployed backend through the configured API endpoint.
-
----
-
-## Future Scope
-
-The following areas can be considered for future versions of SIBIS:
-
-* Multi-store inventory management
-* Mobile application development
-* Advanced AI forecasting
-* Payment integration
-* Accounting integration
-
-These are future enhancements and are not part of the current core implementation.
-
----
-
-## Project Highlights
-
-* Full-stack web application
-* Modular frontend and backend architecture
-* Role-based access control
-* Real-time inventory updates through business transactions
-* Integrated POS system
-* Purchase and supplier management
-* Business dashboards and reporting
-* Firebase-based authentication
-* MongoDB-based data management
-* Google Gemini API integration
-* RESTful backend APIs
-* Cloud deployment
-
----
