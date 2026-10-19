@@ -1,4 +1,4 @@
-# SIBIS — Smart Inventory & Business Insight System
+# SIBIS - Smart Inventory & Business Insight System
 
 **An AI-enabled, full-stack retail management platform for inventory control, point-of-sale operations, procurement management, and data-driven business insights.**
 
