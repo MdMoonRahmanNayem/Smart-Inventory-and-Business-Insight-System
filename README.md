@@ -7,9 +7,7 @@
   **Live Demo:** https://sibis-bd.netlify.app/
 
   **Backend API:** https://sibis-backend.onrender.com
-
-  **Project Demonstration:** https://youtu.be/jX3azHFIuqA
-
+  
 </p>
 
 ---
@@ -29,7 +27,6 @@ SIBIS combines a React-based frontend, a Node.js and Express backend, MongoDB fo
 | Frontend | Netlify | [Open SIBIS](https://sibis-bd.netlify.app/) |
 | Backend | Render | [Backend Server](https://sibis-backend.onrender.com) |
 | Database | MongoDB Atlas | [MongoDB Cloud](https://cloud.mongodb.com/) |
-| Project Demo | YouTube | [Watch Demonstration](https://youtu.be/jX3azHFIuqA) |
 
 > **Note:** MongoDB Atlas is the database management platform. Access to the actual database requires authorized credentials.
 
@@ -405,7 +402,6 @@ Potential areas for future development include:
 - **GitHub Repository:** https://github.com/MdMoonRahmanNayem/Smart-Inventory-Business-Insight-System-SIBIS-
 - **Backend API:** https://sibis-backend.onrender.com
 - **MongoDB Atlas:** https://cloud.mongodb.com/
-- **Demonstration Video:** https://youtu.be/jX3azHFIuqA
 
 ---
 
